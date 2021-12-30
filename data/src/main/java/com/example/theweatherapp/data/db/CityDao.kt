@@ -11,11 +11,11 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface CityDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun addCity(city: City)
+    fun addCity(city: City)
 
     @Query("SELECT * FROM cities")
-    fun getCityList(): LiveData<List<City>>
+    fun getCityList(): List<City>
 
     @Query("SELECT * FROM cities WHERE name = :name")
-    fun getCity(name: String)
+    fun getCity(name: String): City
 }

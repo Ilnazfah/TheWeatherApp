@@ -4,17 +4,23 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.theweatherapp.data.repository.CityRepositoryImpl
+import com.example.theweatherapp.data.storage.CityDaoCityStorage
 import com.example.theweatherapp.data.storage.SharedPrefCityStorage
 import com.example.theweatherapp.domain.usecases.AddCityUseCase
 import com.example.theweatherapp.domain.usecases.GetCityListUseCase
 import com.example.theweatherapp.domain.usecases.GetCityUseCase
 
 class MainViewModelFactory(context: Context) : ViewModelProvider.Factory {
-        private val cityStorage by lazy(LazyThreadSafetyMode.NONE) {
+    private val sharedPrefCityStorage by lazy(LazyThreadSafetyMode.NONE) {
         SharedPrefCityStorage(context)
     }
+
+    private val cityDaoCityStorage by lazy(LazyThreadSafetyMode.NONE) {
+        CityDaoCityStorage(context = context)
+    }
+
     private val cityRepository by lazy(LazyThreadSafetyMode.NONE) {
-        CityRepositoryImpl(cityStorage)
+        CityRepositoryImpl(cityStorageSP = sharedPrefCityStorage, cityStorageDB = cityDaoCityStorage)
     }
     private val addCityUseCase by lazy(LazyThreadSafetyMode.NONE) {
         AddCityUseCase(cityRepository = cityRepository)

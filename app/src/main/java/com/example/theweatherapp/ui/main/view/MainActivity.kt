@@ -11,7 +11,6 @@ import com.example.theweatherapp.ui.main.view.fragments.SearchFragment
 import com.example.theweatherapp.ui.main.viewmodel.MainViewModel
 import com.example.theweatherapp.ui.main.viewmodel.MainViewModelFactory
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_add_city.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var vm: MainViewModel
@@ -25,26 +24,26 @@ class MainActivity : AppCompatActivity() {
 
         vm = ViewModelProvider(this, MainViewModelFactory(this)).get(MainViewModel::class.java)
 
-        search_btn.setOnClickListener {
+        searchButton.setOnClickListener {
             val searchFragment = SearchFragment(vm)
             supportFragmentManager.beginTransaction().apply {
-                replace(R.id.fl_fragment, searchFragment)
+                replace(R.id.flFragment, searchFragment)
                 commit()
             }
         }
 
-        add_city_btn.setOnClickListener {
+        addCityButton.setOnClickListener {
             val addCityFragment = AddCityFragment(vm)
             supportFragmentManager.beginTransaction().apply {
-                replace(R.id.fl_fragment, addCityFragment)
+                replace(R.id.flFragment, addCityFragment)
                 commit()
             }
         }
 
-        get_city_list_btn.setOnClickListener {
+        getCityListButton.setOnClickListener {
             val getCityListFragment = GetCityListFragment()
             supportFragmentManager.beginTransaction().apply {
-                replace(R.id.fl_fragment, getCityListFragment)
+                replace(R.id.flFragment, getCityListFragment)
                 commit()
             }
         }
